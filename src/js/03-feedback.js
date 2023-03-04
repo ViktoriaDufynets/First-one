@@ -8,15 +8,20 @@ form.addEventListener('submit', onFormSubmit);
 form.addEventListener('input', throttle(onFormData, 500));
 
 function onFormData(event) {
-    allData[event.target.name] = event.target.value;
-    console.log(allData);
+    allData[event.target.name] = event.target.value;   
     localStorage.setItem(STORAGE_KEY, JSON.stringify(allData));
 }
 
 function onFormSubmit(event) {
     event.preventDefault();    
-    event.currentTarget.reset();
     localStorage.removeItem(STORAGE_KEY);
+    const allElements = event.currentTarget.elements;
+    const formAll = {
+        email: allElements.email.value,
+        password: allElements.message.value,
+    };
+    console.log(formAll);
+    event.currentTarget.reset();
 };
 
 function populateAllData() {
